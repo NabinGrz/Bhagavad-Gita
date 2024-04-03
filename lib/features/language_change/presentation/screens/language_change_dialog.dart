@@ -1,11 +1,8 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
-import 'package:bhagvadgita/core/features/language_change/presentation/providers/language_provider.dart';
-import 'package:bhagvadgita/core/features/language_change/presentation/widgets/language_item.dart';
+import 'package:bhagvadgita/features/language_change/presentation/providers/language_provider.dart';
+import 'package:bhagvadgita/features/language_change/presentation/widgets/language_item.dart';
 import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 

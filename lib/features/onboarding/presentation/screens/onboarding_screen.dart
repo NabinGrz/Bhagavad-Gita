@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:bhagvadgita/core/extensions/string_extension.dart';
-import 'package:bhagvadgita/core/features/onboarding/presentation/providers/onboarding_providers.dart';
+import 'package:bhagvadgita/features/onboarding/presentation/providers/onboarding_providers.dart';
 import 'package:bhagvadgita/core/helper/shared_preference_helper.dart';
-import 'package:bhagvadgita/core/features/language_change/presentation/screens/language_change_dialog.dart';
+import 'package:bhagvadgita/features/language_change/presentation/screens/language_change_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../dependency_injection/injector.dart';
-import '../../../../route/route.dart';
+import '../../../../core/dependency_injection/injector.dart';
+import '../../../../core/route/route.dart';
 import '../../../language_change/presentation/providers/language_provider.dart';
 
 class OnBoardingScreen extends ConsumerWidget {

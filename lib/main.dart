@@ -1,4 +1,3 @@
-import 'package:bhagvadgita/core/features/onboarding/presentation/providers/onboarding_providers.dart';
 import 'package:bhagvadgita/core/localization/app_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -8,8 +7,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/dependency_injection/injector.dart';
-import 'core/features/language_change/presentation/providers/language_provider.dart';
-import 'core/features/splash/presentation/screens/splash_screen.dart';
+import 'features/language_change/presentation/providers/language_provider.dart';
+import 'features/splash/presentation/screens/splash_screen.dart';
 import 'core/route/route.dart';
 
 void main() async {

@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../dependency_injection/injector.dart';
-import '../../../../helper/shared_preference_helper.dart';
+import '../../../../core/dependency_injection/injector.dart';
+import '../../../../core/helper/shared_preference_helper.dart';
 
 final languageProvider = StateProvider<Locale>((ref) {
   final locale = getIt<SharedPreferencesHelper>().getString("locale");

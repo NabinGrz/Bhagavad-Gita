@@ -8,10 +8,10 @@
 //         MaterialPageRoute(builder: (c) => screen),
 //         (Route<dynamic> route) => false);
 
-import 'package:bhagvadgita/core/features/home/presentation/screens/home_screen.dart';
+import 'package:bhagvadgita/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
-import '../features/onboarding/presentation/screens/onboarding_screen.dart';
+import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
 
 class AppRouter {
   const AppRouter._();

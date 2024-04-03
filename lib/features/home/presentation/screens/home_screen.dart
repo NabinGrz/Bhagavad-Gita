@@ -1,14 +1,12 @@
 import 'dart:convert';
 
 import 'package:bhagvadgita/core/extensions/string_extension.dart';
-import 'package:bhagvadgita/core/route/route.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../dependency_injection/injector.dart';
-import '../../../../helper/shared_preference_helper.dart';
+import '../../../../core/dependency_injection/injector.dart';
+import '../../../../core/helper/shared_preference_helper.dart';
 import '../../../language_change/presentation/providers/language_provider.dart';
-import '../../../onboarding/presentation/providers/onboarding_providers.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});

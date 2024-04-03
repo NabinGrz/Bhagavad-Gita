@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../dependency_injection/injector.dart';
-import '../../../../helper/shared_preference_helper.dart';
-import '../../../../shared/widgets/build_text.dart';
+import '../../../../core/dependency_injection/injector.dart';
+import '../../../../core/helper/shared_preference_helper.dart';
+import '../../../../core/shared/widgets/build_text.dart';
 import '../providers/language_provider.dart';
 
 class LanguageItem extends ConsumerWidget {
@@ -45,14 +45,14 @@ class LanguageItem extends ConsumerWidget {
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
-                color: isSelected ? const Color(0xffFF8600) : Colors.black,
+                color: isSelected ? AppColor.primary : Colors.black,
                 width: 1.5,
               ),
             ),
             child: isSelected
                 ? Container(
                     decoration: const BoxDecoration(
-                        color: Color(0xffFF8600), shape: BoxShape.circle),
+                        color: AppColor.primary, shape: BoxShape.circle),
                   )
                 : const SizedBox.shrink(),
           ),
