@@ -55,7 +55,7 @@ class IntroWidget extends ConsumerWidget {
             fontSize: 13.sp,
           ),
         ),
-        45.height,
+        25.height,
         ref.watch(showMoreProvider)
             ? Text(
                 "${chapterInfo?.chapterSummary}",
@@ -79,7 +79,7 @@ class IntroWidget extends ConsumerWidget {
                 },
                 child: Text(
                     "SHOW ${ref.watch(showMoreProvider) ? "LESS" : "MORE"}"))),
-        30.height,
+        25.height,
       ],
     );
   }
