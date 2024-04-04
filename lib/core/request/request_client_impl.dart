@@ -9,9 +9,7 @@ class RequestClientImpl extends RequestClient {
   int refreshTokenStatusCode = 0;
   BaseOptions options = BaseOptions(
       baseUrl: AppString.rapidApiHosts,
-      headers: {
-        'X-Rapidapi-Key': '61238edbd8mshcb8d83716de8230p1053dejsn0bc6a84788b5'
-      },
+      headers: {'X-Rapidapi-Key': AppString.rapidApiKey},
       connectTimeout: const Duration(seconds: 120),
       receiveTimeout: const Duration(seconds: 120));
   RequestClientImpl() {
@@ -24,11 +22,6 @@ class RequestClientImpl extends RequestClient {
       {required String endPoint,
       Map<String, String>? headers,
       Map<String, dynamic>? queryParameters}) async {
-    if (headers != null) {
-      // headers
-      //   ..addAll(await _createCommonHeader())
-      //   ..addAll(await _createHeader());
-    }
     return await dio.get(endPoint,
         options: Options(
           headers: headers,

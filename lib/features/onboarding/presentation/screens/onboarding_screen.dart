@@ -1,4 +1,3 @@
-
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
 import 'package:bhagvadgita/core/theme/app_colors.dart';
@@ -73,13 +72,6 @@ class OnBoardingScreen extends ConsumerWidget {
                     context: context,
                     builder: (context) => ChangeLanguageDialog(
                       onPressed: () async {
-                        // final locale = ref.watch(mainlocaleProvider);
-                        // Map<String, String> localeMap = {
-                        //   'languageCode': locale.languageCode,
-                        //   'countryCode': locale.countryCode ?? ""
-                        // };
-                        // await getIt<SharedPreferencesHelper>()
-                        //     .setString("locale", json.encode(localeMap));
                         Navigator.pop(context);
                         AppRouter.pushNamedAndRemoveUntil(
                             context: context,
