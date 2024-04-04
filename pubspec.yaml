@@ -81,7 +81,7 @@ flutter:
     - assets/fonts/
     - .env
     - assets/lang/en.json
-    - assets/lang/ne.json
+    - assets/lang/hi.json
   #   - images/a_dot_ham.jpeg
 
   fonts:

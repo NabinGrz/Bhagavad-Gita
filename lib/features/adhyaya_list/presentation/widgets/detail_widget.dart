@@ -1,5 +1,5 @@
-
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/extensions/string_extension.dart';
 import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +19,7 @@ class DetailWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "Last read",
+              "lastread".localize(context),
               style: extraBold().copyWith(
                 fontSize: 16.sp,
                 color: AppColor.textprimary,
@@ -44,7 +44,7 @@ class DetailWidget extends StatelessWidget {
         ),
         8.height,
         Text(
-          "CONTINUE READING",
+          "continueReading".localize(context).toUpperCase(),
           style: medium().copyWith(
             fontSize: 12.sp,
             color: AppColor.primary,
@@ -52,7 +52,7 @@ class DetailWidget extends StatelessWidget {
         ),
         18.height,
         Text(
-          "Chapters",
+          "chapters".localize(context),
           style: extraBold().copyWith(
             fontSize: 16.sp,
             color: AppColor.textprimary,

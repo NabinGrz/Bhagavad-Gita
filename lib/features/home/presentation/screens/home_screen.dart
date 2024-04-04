@@ -31,12 +31,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             ElevatedButton(
                 onPressed: () async {
                   Map<String, String> localeMap = {
-                    'languageCode': 'ne',
-                    'countryCode': 'NP'
+                    'languageCode': 'hi',
+                    'countryCode': 'IN'
                   };
                   await getIt<SharedPreferencesHelper>()
                       .setString("locale", json.encode(localeMap));
-                  notifier.update((state) => const Locale('ne', 'NP'));
+                  notifier.update((state) => const Locale('hi', 'IN'));
                 },
                 child: const Text("Nepali")),
             ElevatedButton(
@@ -54,7 +54,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 onTap: () {
                   Navigator.pop(context);
                 },
-                child: Text("welcome".localize(context))),
+                child: Text("lastread".localize(context))),
           ],
         ),
       ),

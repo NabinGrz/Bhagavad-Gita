@@ -1,4 +1,5 @@
 import 'package:bhagvadgita/core/localization/app_localization.dart';
+import 'package:bhagvadgita/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -65,7 +66,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             ],
             supportedLocales: const [
               Locale('en', 'US'),
-              Locale('ne', 'NP'),
+              Locale('hi', 'IN'),
             ],
             onGenerateRoute: AppRouter.onGenerateRoute,
             home: const SplashScreen(),
@@ -73,55 +74,3 @@ class _MyAppState extends ConsumerState<MyApp> {
         });
   }
 }
-
-
-// class MyApp extends StatefulWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   State<MyApp> createState() => _MyAppState();
-// }
-
-// class _MyAppState extends State<MyApp> {
-//   Locale locale = const Locale("en", 'US');
-
-//   ThemeData _buildTheme(brightness) {
-//     var baseTheme = ThemeData(brightness: brightness);
-
-//     return baseTheme.copyWith(
-//       textTheme: GoogleFonts.interTextTheme(baseTheme.textTheme),
-//     );
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Bhagavad Gita',
-//       theme: _buildTheme(Brightness.light),
-//       locale: locale,
-//       localeResolutionCallback: (deviceLocale, supportedLocales) {
-//         for (var locale in supportedLocales) {
-//           if (locale.languageCode == deviceLocale!.languageCode &&
-//               locale.countryCode == deviceLocale.countryCode) {
-//             return deviceLocale;
-//           }
-//         }
-//         return supportedLocales.first;
-//       },
-//       localizationsDelegates: const [
-//         GlobalMaterialLocalizations.delegate,
-//         GlobalWidgetsLocalizations.delegate,
-//         GlobalCupertinoLocalizations.delegate,
-//         AppLocalization.delegate,
-//       ],
-//       supportedLocales: const [
-//         Locale('en', 'US'),
-//         Locale('ne', 'NP'),
-//       ],
-//       onGenerateRoute: AppRouter.onGenerateRoute,
-//       home: const SplashScreen(),
-//     );
-//   }
-
-// }
-

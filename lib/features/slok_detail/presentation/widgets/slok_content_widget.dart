@@ -1,4 +1,5 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/extensions/string_extension.dart';
 import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class SlokTranslationsWidget extends StatelessWidget {
         return Column(
           children: [
             Text(
-              isTranslation ? "Translation" : "Commentary",
+              (isTranslation ? "translation" : "commentary").localize(context),
               style: bold().copyWith(
                 color: AppColor.textprimary,
                 fontSize: 16.sp,

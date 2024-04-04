@@ -1,4 +1,5 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/extensions/string_extension.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/providers/chapter_info_provider.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class IntroWidget extends ConsumerWidget {
             ),
             25.width,
             Text(
-              "CHAPTER $chapterNumber",
+              "${"chapter".localize(context)} $chapterNumber",
               style: semiBold().copyWith(
                   fontSize: 14.sp,
                   color: const Color(
@@ -75,7 +76,8 @@ class IntroWidget extends ConsumerWidget {
                   ref.read(showMoreProvider.notifier).update((state) => !state);
                 },
                 child: Text(
-                    "SHOW ${ref.watch(showMoreProvider) ? "LESS" : "MORE"}"))),
+                    (ref.watch(showMoreProvider) ? "showless" : "showMore")
+                        .localize(context)))),
         25.height,
       ],
     );

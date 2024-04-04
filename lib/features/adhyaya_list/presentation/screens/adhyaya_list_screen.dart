@@ -1,8 +1,8 @@
-
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/adhyaya_list/presentation/providers/adhyaya_list_provider.dart';
+import 'package:bhagvadgita/features/language_change/presentation/screens/language_change_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -39,7 +39,12 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen> {
         ),
         actions: [
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => const ChangeLanguageDialog(),
+                );
+              },
               icon: const Icon(
                 Icons.settings_outlined,
                 color: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/extensions/string_extension.dart';
 import 'package:bhagvadgita/core/route/route.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_list/data/model/bhagavad_gita_verse.dart';
@@ -33,7 +34,7 @@ class SlokWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Verse ${verse.verseNumber}",
+                "${"verse".localize(context)} ${verse.verseNumber}",
                 style: semiBold().copyWith(
                   fontSize: 14.sp,
                 ),

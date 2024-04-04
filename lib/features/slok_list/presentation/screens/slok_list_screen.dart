@@ -87,18 +87,6 @@ class _SlokListScreenState extends ConsumerState<SlokListScreen> {
                               child: Text("Empty"),
                             )
                     }
-
-                    // ref.watch(versesProvider).when(
-                    //       data: (data) {
-                    //         return Text("$data");
-                    //       },
-                    //       error: (error, stackTrace) {
-                    //         return Text("$error");
-                    //       },
-                    //       loading: () => const Center(
-                    //         child: CircularProgressIndicator.adaptive(),
-                    //       ),
-                    //     )
                   ],
                 ),
               ),

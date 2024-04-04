@@ -37,6 +37,7 @@ class LanguageItem extends ConsumerWidget {
                 .setString("locale", json.encode(localeMap));
             notifier.update((state) =>
                 Locale(locale.languageCode, locale.countryCode ?? ""));
+            Navigator.pop(context);
           },
           child: Container(
             padding: const EdgeInsets.all(2),
