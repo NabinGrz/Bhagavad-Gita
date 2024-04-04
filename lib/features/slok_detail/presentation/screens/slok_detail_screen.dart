@@ -1,4 +1,7 @@
+import 'package:bhagvadgita/core/dependency_injection/injector.dart';
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/helper/shared_preference_helper.dart';
+import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_detail/presentation/providers/slok_detail_provider.dart';
 import 'package:bhagvadgita/features/slok_detail/presentation/widgets/slok_content_widget.dart';
@@ -6,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../language_change/presentation/screens/language_change_dialog.dart';
 import '../../../slok_list/domain/entities/slok_states/slok_state.dart';
 
 class SlokDetailScreen extends ConsumerStatefulWidget {
@@ -34,20 +38,65 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
   Widget build(BuildContext context) {
     final detail = ref.watch(slokDetailProvider);
     final isLoading = detail is Loading;
+    final data = detail is Success ? detail.detail?.data : null;
+    final isFavorite =
+        ref.watch(favoriteProvider)?.contains(data?.id.toString()) ?? false;
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          const Icon(Icons.bookmark_outline),
-          20.width,
-          Text(
-            "Aa",
-            style: regular().copyWith(fontSize: 14.sp),
-          ),
-          25.width,
-          const Icon(Icons.menu),
-          20.width,
-        ],
-      ),
+      appBar: isLoading
+          ? null
+          : AppBar(
+              actions: [
+                InkWell(
+                  splashColor: AppColor.primary.withOpacity(0.3),
+                  highlightColor: AppColor.primary.withOpacity(0.1),
+                  onTap: () async {
+                    List<String>? favorites = getIt<SharedPreferencesHelper>()
+                        .getStringList("favorites");
+                    final id = data?.id.toString();
+                    if (isFavorite) {
+                      if (id != null) {
+                        favorites?.remove(id);
+                        getIt<SharedPreferencesHelper>()
+                            .setStringList("favorites", favorites ?? []);
+                        ref
+                            .read(favoriteProvider.notifier)
+                            .update((state) => favorites ?? []);
+                      }
+                    } else {
+                      if (id != null && favorites?.contains(id) != true) {
+                        getIt<SharedPreferencesHelper>().setStringList(
+                            "favorites", [...favorites ?? [], id]);
+                        ref
+                            .read(favoriteProvider.notifier)
+                            .update((state) => [...favorites ?? [], id]);
+                      }
+                    }
+                  },
+                  child: Icon(
+                    isFavorite ? Icons.bookmark : Icons.bookmark_outline,
+                    color: isFavorite ? AppColor.primary : null,
+                  ),
+                ),
+                20.width,
+                InkWell(
+                  onTap: () {
+                    // showDialog(
+                    //   context: context,
+                    //   builder: (context) => const ChangeLanguageDialog(),
+                    // );
+                    getIt<SharedPreferencesHelper>()
+                        .setStringList("favorites", []);
+                  },
+                  child: Text(
+                    "Aa",
+                    style: regular().copyWith(fontSize: 14.sp),
+                  ),
+                ),
+                25.width,
+                const Icon(Icons.menu),
+                20.width,
+              ],
+            ),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator.adaptive(),
@@ -64,21 +113,21 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
                   if (detail is Success) ...{
                     25.height,
                     Text(
-                      "${detail.detail?.data?.chapterNumber}.${detail.detail?.data?.chapterNumber}",
+                      "${data?.chapterNumber}.${data?.chapterNumber}",
                       style: bold().copyWith(
                         fontSize: 16.sp,
                       ),
                     ),
                     10.height,
                     Text(
-                      "${detail.detail?.data?.text}",
+                      "${data?.text}",
                       textAlign: TextAlign.center,
                       style: bold().copyWith(
                           fontSize: 16.sp, color: const Color(0xffCB874B)),
                     ),
                     30.height,
                     SlokTranslationsWidget(
-                      detail: detail.detail?.data,
+                      detail: data,
                       isTranslation: true,
                     ),
                     35.height,
@@ -88,7 +137,7 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
                     ),
                     35.height,
                     SlokTranslationsWidget(
-                      detail: detail.detail?.data,
+                      detail: data,
                       isTranslation: false,
                     ),
                     40.height,

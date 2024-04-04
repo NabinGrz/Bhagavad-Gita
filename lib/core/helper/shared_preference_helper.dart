@@ -10,6 +10,11 @@ class SharedPreferencesHelper {
     return _prefs.getString(key);
   }
 
+  // Method to get a list of string from SharedPreferences
+  List<String>? getStringList(String key) {
+    return _prefs.getStringList(key);
+  }
+
   // Method to get a bool from SharedPreferences
   bool getBool(String key) {
     return _prefs.getBool(key) ?? false;
@@ -18,6 +23,11 @@ class SharedPreferencesHelper {
   // Method to save a string to SharedPreferences
   Future<bool> setString(String key, String value) {
     return _prefs.setString(key, value);
+  }
+
+  // Method to save a list of string to SharedPreferences
+  Future<bool> setStringList(String key, List<String> value) {
+    return _prefs.setStringList(key, value);
   }
 
   // Method to save a bool to SharedPreferences
