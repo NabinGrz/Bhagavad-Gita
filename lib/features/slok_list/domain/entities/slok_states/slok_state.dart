@@ -11,6 +11,9 @@ abstract class SlokState with _$SlokState {
   const factory SlokState.initial() = Initial;
   const factory SlokState.loading() = Loading;
   const factory SlokState.failure(String failedAppStateResponse) = Failure;
-  const factory SlokState.success(DataResponse<List<BhagavadGitaVerse>>? data,
-      DataResponse<ChapterInfo>? chapterInfo) = Success;
+  const factory SlokState.success({
+    required DataResponse<List<BhagavadGitaVerse>>? data,
+    required DataResponse<ChapterInfo>? chapterInfo,
+    required DataResponse<BhagavadGitaVerse>? detail,
+  }) = Success;
 }

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/datasource/slok_list_datasource.dart';
 import '../../data/repository/slok_list_repository.dart';
-import '../../domain/repository/domain_list_repository_impl.dart';
+import '../../domain/repository/slok_list_repository_impl.dart';
 import '../../domain/usecase/slok_list_usecase.dart';
 
 final versesDataSrcProvider = Provider<SlokListDataSource>(
@@ -28,7 +28,7 @@ class VersesNotifier extends StateNotifier<SlokState> {
     data.fold((l) {
       state = SlokState.failure(l.message ?? "Something went wrong");
     }, (r) {
-      state = SlokState.success(r, null);
+      state = SlokState.success(data: r, chapterInfo: null, detail: null);
     });
   }
 }

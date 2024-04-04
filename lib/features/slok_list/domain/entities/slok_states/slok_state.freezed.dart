@@ -21,8 +21,10 @@ mixin _$SlokState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String failedAppStateResponse) failure,
-    required TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)
+    required TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -31,8 +33,10 @@ mixin _$SlokState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String failedAppStateResponse)? failure,
-    TResult? Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult? Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
   }) =>
       throw _privateConstructorUsedError;
@@ -41,8 +45,10 @@ mixin _$SlokState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String failedAppStateResponse)? failure,
-    TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
     required TResult orElse(),
   }) =>
@@ -132,8 +138,10 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String failedAppStateResponse) failure,
-    required TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)
+    required TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)
         success,
   }) {
     return initial();
@@ -145,8 +153,10 @@ class _$InitialImpl implements Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String failedAppStateResponse)? failure,
-    TResult? Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult? Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
   }) {
     return initial?.call();
@@ -158,8 +168,10 @@ class _$InitialImpl implements Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String failedAppStateResponse)? failure,
-    TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
     required TResult orElse(),
   }) {
@@ -252,8 +264,10 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String failedAppStateResponse) failure,
-    required TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)
+    required TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)
         success,
   }) {
     return loading();
@@ -265,8 +279,10 @@ class _$LoadingImpl implements Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String failedAppStateResponse)? failure,
-    TResult? Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult? Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
   }) {
     return loading?.call();
@@ -278,8 +294,10 @@ class _$LoadingImpl implements Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String failedAppStateResponse)? failure,
-    TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
     required TResult orElse(),
   }) {
@@ -399,8 +417,10 @@ class _$FailureImpl implements Failure {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String failedAppStateResponse) failure,
-    required TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)
+    required TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)
         success,
   }) {
     return failure(failedAppStateResponse);
@@ -412,8 +432,10 @@ class _$FailureImpl implements Failure {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String failedAppStateResponse)? failure,
-    TResult? Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult? Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
   }) {
     return failure?.call(failedAppStateResponse);
@@ -425,8 +447,10 @@ class _$FailureImpl implements Failure {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String failedAppStateResponse)? failure,
-    TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
     required TResult orElse(),
   }) {
@@ -491,7 +515,8 @@ abstract class _$$SuccessImplCopyWith<$Res> {
   @useResult
   $Res call(
       {DataResponse<List<BhagavadGitaVerse>>? data,
-      DataResponse<ChapterInfo>? chapterInfo});
+      DataResponse<ChapterInfo>? chapterInfo,
+      DataResponse<BhagavadGitaVerse>? detail});
 }
 
 /// @nodoc
@@ -507,16 +532,21 @@ class __$$SuccessImplCopyWithImpl<$Res>
   $Res call({
     Object? data = freezed,
     Object? chapterInfo = freezed,
+    Object? detail = freezed,
   }) {
     return _then(_$SuccessImpl(
-      freezed == data
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
               as DataResponse<List<BhagavadGitaVerse>>?,
-      freezed == chapterInfo
+      chapterInfo: freezed == chapterInfo
           ? _value.chapterInfo
           : chapterInfo // ignore: cast_nullable_to_non_nullable
               as DataResponse<ChapterInfo>?,
+      detail: freezed == detail
+          ? _value.detail
+          : detail // ignore: cast_nullable_to_non_nullable
+              as DataResponse<BhagavadGitaVerse>?,
     ));
   }
 }
@@ -524,16 +554,19 @@ class __$$SuccessImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SuccessImpl implements Success {
-  const _$SuccessImpl(this.data, this.chapterInfo);
+  const _$SuccessImpl(
+      {required this.data, required this.chapterInfo, required this.detail});
 
   @override
   final DataResponse<List<BhagavadGitaVerse>>? data;
   @override
   final DataResponse<ChapterInfo>? chapterInfo;
+  @override
+  final DataResponse<BhagavadGitaVerse>? detail;
 
   @override
   String toString() {
-    return 'SlokState.success(data: $data, chapterInfo: $chapterInfo)';
+    return 'SlokState.success(data: $data, chapterInfo: $chapterInfo, detail: $detail)';
   }
 
   @override
@@ -543,11 +576,12 @@ class _$SuccessImpl implements Success {
             other is _$SuccessImpl &&
             (identical(other.data, data) || other.data == data) &&
             (identical(other.chapterInfo, chapterInfo) ||
-                other.chapterInfo == chapterInfo));
+                other.chapterInfo == chapterInfo) &&
+            (identical(other.detail, detail) || other.detail == detail));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, data, chapterInfo);
+  int get hashCode => Object.hash(runtimeType, data, chapterInfo, detail);
 
   @JsonKey(ignore: true)
   @override
@@ -561,11 +595,13 @@ class _$SuccessImpl implements Success {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(String failedAppStateResponse) failure,
-    required TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)
+    required TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)
         success,
   }) {
-    return success(data, chapterInfo);
+    return success(data, chapterInfo, detail);
   }
 
   @override
@@ -574,11 +610,13 @@ class _$SuccessImpl implements Success {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(String failedAppStateResponse)? failure,
-    TResult? Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult? Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
   }) {
-    return success?.call(data, chapterInfo);
+    return success?.call(data, chapterInfo, detail);
   }
 
   @override
@@ -587,13 +625,15 @@ class _$SuccessImpl implements Success {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(String failedAppStateResponse)? failure,
-    TResult Function(DataResponse<List<BhagavadGitaVerse>>? data,
-            DataResponse<ChapterInfo>? chapterInfo)?
+    TResult Function(
+            DataResponse<List<BhagavadGitaVerse>>? data,
+            DataResponse<ChapterInfo>? chapterInfo,
+            DataResponse<BhagavadGitaVerse>? detail)?
         success,
     required TResult orElse(),
   }) {
     if (success != null) {
-      return success(data, chapterInfo);
+      return success(data, chapterInfo, detail);
     }
     return orElse();
   }
@@ -637,11 +677,14 @@ class _$SuccessImpl implements Success {
 }
 
 abstract class Success implements SlokState {
-  const factory Success(final DataResponse<List<BhagavadGitaVerse>>? data,
-      final DataResponse<ChapterInfo>? chapterInfo) = _$SuccessImpl;
+  const factory Success(
+      {required final DataResponse<List<BhagavadGitaVerse>>? data,
+      required final DataResponse<ChapterInfo>? chapterInfo,
+      required final DataResponse<BhagavadGitaVerse>? detail}) = _$SuccessImpl;
 
   DataResponse<List<BhagavadGitaVerse>>? get data;
   DataResponse<ChapterInfo>? get chapterInfo;
+  DataResponse<BhagavadGitaVerse>? get detail;
   @JsonKey(ignore: true)
   _$$SuccessImplCopyWith<_$SuccessImpl> get copyWith =>
       throw _privateConstructorUsedError;

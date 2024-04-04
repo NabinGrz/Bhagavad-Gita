@@ -4,13 +4,9 @@ import 'package:bhagvadgita/features/slok_list/domain/entities/slok_states/slok_
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../data/datasource/chapter_info_datasource.dart';
-import '../../data/datasource/slok_list_datasource.dart';
 import '../../data/repository/chapter_info_repository.dart';
-import '../../data/repository/slok_list_repository.dart';
 import '../../domain/repository/chapter_info_repository_impl.dart';
-import '../../domain/repository/domain_list_repository_impl.dart';
 import '../../domain/usecase/chapter_info_usecase.dart';
-import '../../domain/usecase/slok_list_usecase.dart';
 
 final chapterInfoDataSrcProvider = Provider<ChapterInfoDataSource>((ref) =>
     ChapterInfoDataSourceImpl(requestClient: getIt<RequestClientImpl>()));
@@ -36,7 +32,7 @@ class ChapterInfoNotifier extends StateNotifier<SlokState> {
     data.fold((l) {
       state = SlokState.failure(l.message ?? "Something went wrong");
     }, (r) {
-      state = SlokState.success(null, r);
+      state = SlokState.success(data: null, chapterInfo: r, detail: null);
     });
   }
 }

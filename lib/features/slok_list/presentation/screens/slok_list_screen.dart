@@ -1,5 +1,3 @@
-import 'package:bhagvadgita/core/extensions/num_extension.dart';
-import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_list/domain/entities/slok_states/slok_state.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/providers/chapter_info_provider.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/providers/slok_list_provider.dart';
@@ -56,6 +54,8 @@ class _SlokListScreenState extends ConsumerState<SlokListScreen> {
                 padding: EdgeInsets.symmetric(
                   horizontal: 20.w,
                 ),
+                physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [

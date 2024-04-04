@@ -1,9 +1,6 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
-import 'package:bhagvadgita/features/slok_list/domain/entities/slok_states/slok_state.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/providers/chapter_info_provider.dart';
-import 'package:bhagvadgita/features/slok_list/presentation/providers/slok_list_provider.dart';
-import 'package:bhagvadgita/features/slok_list/presentation/widgets/slok_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
