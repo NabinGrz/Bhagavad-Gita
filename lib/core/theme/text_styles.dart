@@ -1,35 +1,34 @@
 import 'package:flutter/cupertino.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-TextStyle extraLight() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle extraLight() => const TextStyle(
+      fontFamily: "Inter-extra-light",
       fontWeight: FontWeight.w100,
     );
-TextStyle thin() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle thin() => const TextStyle(
+      fontFamily: "Inter-thin",
       fontWeight: FontWeight.w200,
     );
-TextStyle light() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle light() => const TextStyle(
+      fontFamily: "Inter-light",
       fontWeight: FontWeight.w300,
     );
-TextStyle regular() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle regular() => const TextStyle(
+      fontFamily: "Inter-regular",
       fontWeight: FontWeight.w400,
     );
-TextStyle medium() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle medium() => const TextStyle(
+      fontFamily: "Inter-medium",
       fontWeight: FontWeight.w500,
     );
-TextStyle semiBold() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle semiBold() => const TextStyle(
+      fontFamily: "Inter-semi-bold",
       fontWeight: FontWeight.w600,
     );
-TextStyle bold() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle bold() => const TextStyle(
+      fontFamily: "Inter-bold",
       fontWeight: FontWeight.w700,
     );
-TextStyle extraBold() => TextStyle(
-      fontFamily: GoogleFonts.inter().fontFamily,
+TextStyle extraBold() => const TextStyle(
+      fontFamily: "Inter-extra-bold",
       fontWeight: FontWeight.w800,
     );

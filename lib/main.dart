@@ -13,8 +13,8 @@ import 'core/route/route.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Injector.setUpLocator();
   await dotenv.load(fileName: ".env");
+  await Injector.setUpLocator();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -45,6 +45,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         builder: (context, snapshot) {
           return MaterialApp(
             title: 'Bhagavad Gita',
+            debugShowCheckedModeBanner: false,
             theme: _buildTheme(Brightness.light),
             locale: ref.watch(languageProvider),
             localeResolutionCallback: (deviceLocale, supportedLocales) {

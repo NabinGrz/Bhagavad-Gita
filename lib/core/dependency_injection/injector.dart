@@ -1,3 +1,4 @@
+import 'package:bhagvadgita/core/request/request_client_impl.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,5 +14,6 @@ class Injector {
     await getIt.isReady<SharedPreferences>();
     getIt.registerSingleton<SharedPreferencesHelper>(
         SharedPreferencesHelper(getIt()));
+    getIt.registerSingleton(RequestClientImpl());
   }
 }

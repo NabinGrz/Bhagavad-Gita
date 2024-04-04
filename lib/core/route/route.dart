@@ -8,7 +8,9 @@
 //         MaterialPageRoute(builder: (c) => screen),
 //         (Route<dynamic> route) => false);
 
+import 'package:bhagvadgita/features/adhyaya_list/presentation/screens/adhyaya_list_screen.dart';
 import 'package:bhagvadgita/features/home/presentation/screens/home_screen.dart';
+import 'package:bhagvadgita/features/slok_list/presentation/screens/slok_list_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../features/onboarding/presentation/screens/onboarding_screen.dart';
@@ -18,12 +20,18 @@ class AppRouter {
 
   static const onBoardingScreen = "/onBoarding";
   static const homeScreen = "/home";
+  static const adhyayaListScreen = "/adhyayaListScreen";
+  static const slokListScreen = "/slokListScreen";
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case onBoardingScreen:
         return navigate(settings, const OnBoardingScreen());
       case homeScreen:
         return navigate(settings, const HomeScreen());
+      case adhyayaListScreen:
+        return navigate(settings, const AdhyayaListScreen());
+      case slokListScreen:
+        return navigate(settings, const SlokListScreen());
       default:
         throw Exception(["Route Not Found!!"]);
     }
@@ -35,9 +43,16 @@ class AppRouter {
         builder: (_) => widget, settings: settings);
   }
 
-  static void pushNamed(
-      {required BuildContext context, required String routeName}) {
-    Navigator.pushNamed(context, routeName);
+  static void pushNamed({
+    required BuildContext context,
+    required String routeName,
+    Object? arguments,
+  }) {
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: arguments,
+    );
   }
 
   static void pushAndRemoveUpto(

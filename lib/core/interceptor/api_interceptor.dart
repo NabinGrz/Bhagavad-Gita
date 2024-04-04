@@ -9,8 +9,6 @@ class ApiInterceptor extends Interceptor {
       RequestOptions options, RequestInterceptorHandler handler) async {
     options.headers.putIfAbsent("Content-Type", () => 'application/json');
     options.headers.putIfAbsent("Accept", () => 'application/json');
-    // options.headers.putIfAbsent("Agent", () => 'mobile');
-    // await addLocale(options);
     onRequestLogger(options);
     super.onRequest(options, handler);
   }

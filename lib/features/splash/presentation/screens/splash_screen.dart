@@ -14,7 +14,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(const Duration(seconds: 2), () async {
       AppRouter.pushNamed(
-          context: context, routeName: AppRouter.onBoardingScreen);
+          context: context, routeName: AppRouter.adhyayaListScreen);
     });
     super.initState();
   }
