@@ -1,6 +1,4 @@
-import 'package:bhagvadgita/core/dependency_injection/injector.dart';
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
-import 'package:bhagvadgita/core/helper/shared_preference_helper.dart';
 import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_detail/presentation/providers/slok_detail_provider.dart';
@@ -36,6 +34,7 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final notifier = ref.read(slokDetailProvider.notifier);
     final detail = ref.watch(slokDetailProvider);
     final isLoading = detail is Loading;
     final data = detail is Success ? detail.detail?.data : null;
@@ -49,29 +48,8 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
                 InkWell(
                   splashColor: AppColor.primary.withOpacity(0.3),
                   highlightColor: AppColor.primary.withOpacity(0.1),
-                  onTap: () async {
-                    List<String>? favorites = getIt<SharedPreferencesHelper>()
-                        .getStringList("favorites");
-                    final id = data?.id.toString();
-                    if (isFavorite) {
-                      if (id != null) {
-                        favorites?.remove(id);
-                        getIt<SharedPreferencesHelper>()
-                            .setStringList("favorites", favorites ?? []);
-                        ref
-                            .read(favoriteProvider.notifier)
-                            .update((state) => favorites ?? []);
-                      }
-                    } else {
-                      if (id != null && favorites?.contains(id) != true) {
-                        getIt<SharedPreferencesHelper>().setStringList(
-                            "favorites", [...favorites ?? [], id]);
-                        ref
-                            .read(favoriteProvider.notifier)
-                            .update((state) => [...favorites ?? [], id]);
-                      }
-                    }
-                  },
+                  onTap: () async =>
+                      await notifier.toggleFavorite(data, isFavorite, ref),
                   child: Icon(
                     isFavorite ? Icons.bookmark : Icons.bookmark_outline,
                     color: isFavorite ? AppColor.primary : null,
@@ -79,13 +57,15 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
                 ),
                 20.width,
                 InkWell(
+                  splashColor: AppColor.primary.withOpacity(0.3),
+                  highlightColor: AppColor.primary.withOpacity(0.1),
                   onTap: () {
-                    // showDialog(
-                    //   context: context,
-                    //   builder: (context) => const ChangeLanguageDialog(),
-                    // );
-                    getIt<SharedPreferencesHelper>()
-                        .setStringList("favorites", []);
+                    showDialog(
+                      context: context,
+                      builder: (context) => ChangeLanguageDialog(
+                        onPressed: () => Navigator.pop(context),
+                      ),
+                    );
                   },
                   child: Text(
                     "Aa",

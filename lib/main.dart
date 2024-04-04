@@ -1,5 +1,4 @@
 import 'package:bhagvadgita/core/localization/app_localization.dart';
-import 'package:bhagvadgita/features/home/presentation/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -48,7 +47,7 @@ class _MyAppState extends ConsumerState<MyApp> {
             title: 'Bhagavad Gita',
             debugShowCheckedModeBanner: false,
             theme: _buildTheme(Brightness.light),
-            locale: ref.watch(languageProvider),
+            locale: ref.watch(mainlocaleProvider),
             localeResolutionCallback: (deviceLocale, supportedLocales) {
               for (var locale in supportedLocales) {
                 if (locale.languageCode == deviceLocale!.languageCode &&

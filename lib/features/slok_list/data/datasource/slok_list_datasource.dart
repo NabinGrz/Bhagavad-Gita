@@ -22,8 +22,9 @@ class SlokListDataSourceImpl extends SlokListDataSource {
           endPoint: "${AppString.allChapters}/$number/verses/");
       if (response?.statusCode.toString()[0] == "2") {
         final data = response?.data as List<dynamic>;
-        final r = data.map((e) => BhagavadGitaVerse.fromJson(e)).toList();
-        return DataResponse.success(r);
+        final dataList =
+            data.map((e) => BhagavadGitaVerse.fromJson(e)).toList();
+        return DataResponse.success(dataList);
       } else {
         return DataResponse.error(response?.data);
       }

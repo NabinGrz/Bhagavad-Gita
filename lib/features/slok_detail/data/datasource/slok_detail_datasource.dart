@@ -23,9 +23,8 @@ class SlokDetailDataSourceImpl extends SlokDetailDataSource {
       final response = await _requestClient.get(
           endPoint: "${AppString.allChapters}/$chapterNum/verses/$verseNum/");
       if (response?.statusCode.toString()[0] == "2") {
-        final data = response?.data;
-        final r = BhagavadGitaVerse.fromJson(data);
-        return DataResponse.success(r);
+        final data = BhagavadGitaVerse.fromJson(response?.data);
+        return DataResponse.success(data);
       } else {
         return DataResponse.error(response?.data);
       }

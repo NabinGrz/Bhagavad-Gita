@@ -1,3 +1,4 @@
+import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/features/slok_list/domain/entities/slok_states/slok_state.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/providers/chapter_info_provider.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/providers/slok_list_provider.dart';
@@ -40,7 +41,7 @@ class _SlokListScreenState extends ConsumerState<SlokListScreen> {
     final chapterInfo = ref.watch(chapterInfoProvider);
     final isLoading = verses is Loading || chapterInfo is Loading;
     return Scaffold(
-      appBar: AppBar(),
+      appBar: isLoading ? null : AppBar(),
       body: isLoading
           ? const Center(
               child: CircularProgressIndicator.adaptive(),
@@ -86,7 +87,8 @@ class _SlokListScreenState extends ConsumerState<SlokListScreen> {
                           : const Center(
                               child: Text("Empty"),
                             )
-                    }
+                    },
+                    40.height,
                   ],
                 ),
               ),

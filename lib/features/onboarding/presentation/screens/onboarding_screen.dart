@@ -1,3 +1,4 @@
+
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
 import 'package:bhagvadgita/core/theme/app_colors.dart';
@@ -7,6 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+import '../../../../core/route/route.dart';
+import '../../../language_change/presentation/screens/language_change_dialog.dart';
 
 class OnBoardingScreen extends ConsumerWidget {
   const OnBoardingScreen({super.key});
@@ -64,7 +68,26 @@ class OnBoardingScreen extends ConsumerWidget {
             ),
             if (currentIndex == 3) ...{
               ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) => ChangeLanguageDialog(
+                      onPressed: () async {
+                        // final locale = ref.watch(mainlocaleProvider);
+                        // Map<String, String> localeMap = {
+                        //   'languageCode': locale.languageCode,
+                        //   'countryCode': locale.countryCode ?? ""
+                        // };
+                        // await getIt<SharedPreferencesHelper>()
+                        //     .setString("locale", json.encode(localeMap));
+                        Navigator.pop(context);
+                        AppRouter.pushNamedAndRemoveUntil(
+                            context: context,
+                            routeName: AppRouter.adhyayaListScreen);
+                      },
+                    ),
+                  );
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColor.primary,
                 ),
@@ -83,8 +106,8 @@ class OnBoardingScreen extends ConsumerWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      controller.animateToPage(currentIndex - 1,
-                          duration: const Duration(milliseconds: 300),
+                      controller.animateToPage(3,
+                          duration: const Duration(milliseconds: 100),
                           curve: Curves.easeInOut);
                     },
                     child: BuildText(

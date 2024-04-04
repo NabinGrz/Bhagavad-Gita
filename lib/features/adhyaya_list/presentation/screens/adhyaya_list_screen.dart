@@ -1,3 +1,4 @@
+
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
@@ -42,7 +43,9 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen> {
               onPressed: () {
                 showDialog(
                   context: context,
-                  builder: (context) => const ChangeLanguageDialog(),
+                  builder: (context) => ChangeLanguageDialog(
+                    onPressed: () => Navigator.pop(context),
+                  ),
                 );
               },
               icon: const Icon(

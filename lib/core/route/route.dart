@@ -59,10 +59,9 @@ class AppRouter {
     );
   }
 
-  static void pushAndRemoveUpto(
-          {required BuildContext context, required Widget screen}) =>
-      Navigator.pushAndRemoveUntil(
-          context,
-          MaterialPageRoute(builder: (c) => screen),
-          (Route<dynamic> route) => false);
+  static void pushNamedAndRemoveUntil({
+    required BuildContext context,
+    required String routeName,
+  }) =>
+      Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => false);
 }

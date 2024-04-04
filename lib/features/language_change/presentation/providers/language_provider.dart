@@ -1,17 +1,12 @@
-import 'dart:convert';
 
+import 'package:bhagvadgita/core/utils/locale.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/dependency_injection/injector.dart';
-import '../../../../core/helper/shared_preference_helper.dart';
 
 final languageProvider = StateProvider<Locale>((ref) {
-  final locale = getIt<SharedPreferencesHelper>().getString("locale");
-  if (locale != null) {
-    final localeData = json.decode(locale) as Map<String, dynamic>;
-    return Locale(localeData['languageCode'], localeData['countryCode']);
-  } else {
-    return const Locale('en', 'US');
-  }
+  return getLocale();
+});
+final mainlocaleProvider = StateProvider<Locale>((ref) {
+  return getLocale();
 });

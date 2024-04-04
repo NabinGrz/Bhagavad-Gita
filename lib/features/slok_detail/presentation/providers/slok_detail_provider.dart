@@ -4,6 +4,7 @@ import 'package:bhagvadgita/features/slok_list/domain/entities/slok_states/slok_
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/helper/shared_preference_helper.dart';
+import '../../../slok_list/data/model/bhagavad_gita_verse.dart';
 import '../../data/datasource/slok_detail_datasource.dart';
 import '../../data/repository/slok_detail_repository.dart';
 import '../../domain/repository/slok_detail_repository_impl.dart';
@@ -36,5 +37,28 @@ class SlokDetailNotifier extends StateNotifier<SlokState> {
     }, (r) {
       state = SlokState.success(data: null, chapterInfo: null, detail: r);
     });
+  }
+
+  Future<void> toggleFavorite(
+      BhagavadGitaVerse? data, bool isFavorite, WidgetRef ref) async {
+    List<String>? favorites =
+        getIt<SharedPreferencesHelper>().getStringList("favorites");
+    final id = data?.id.toString();
+    if (isFavorite) {
+      if (id != null) {
+        favorites?.remove(id);
+        getIt<SharedPreferencesHelper>()
+            .setStringList("favorites", favorites ?? []);
+        ref.read(favoriteProvider.notifier).update((state) => favorites ?? []);
+      }
+    } else {
+      if (id != null && favorites?.contains(id) != true) {
+        getIt<SharedPreferencesHelper>()
+            .setStringList("favorites", [...favorites ?? [], id]);
+        ref
+            .read(favoriteProvider.notifier)
+            .update((state) => [...favorites ?? [], id]);
+      }
+    }
   }
 }

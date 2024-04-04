@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/features/language_change/presentation/providers/language_provider.dart';
 import 'package:bhagvadgita/features/language_change/presentation/widgets/language_item.dart';
@@ -6,8 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/dependency_injection/injector.dart';
+import '../../../../core/helper/shared_preference_helper.dart';
+import '../../../../core/theme/app_colors.dart';
+
 class ChangeLanguageDialog extends ConsumerWidget {
-  const ChangeLanguageDialog({super.key});
+  final void Function() onPressed;
+  const ChangeLanguageDialog({
+    super.key,
+    required this.onPressed,
+  });
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -55,6 +65,31 @@ class ChangeLanguageDialog extends ConsumerWidget {
                   isSelected: ref.watch(languageProvider).languageCode == "hi",
                 ),
               ],
+            ),
+            28.height,
+            ElevatedButton(
+              onPressed: () async {
+                final locale = ref.watch(languageProvider);
+                Map<String, String> localeMap = {
+                  'languageCode': locale.languageCode,
+                  'countryCode': locale.countryCode ?? ""
+                };
+                await getIt<SharedPreferencesHelper>()
+                    .setString("locale", json.encode(localeMap));
+                ref.read(mainlocaleProvider.notifier).update((state) =>
+                    Locale(locale.languageCode, locale.countryCode ?? ""));
+                onPressed();
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColor.primary,
+              ),
+              child: BuildText(
+                text: "Ok,Let's go ->",
+                weight: FontWeight.w600,
+                fontSize: 16.sp,
+                color: Colors.white,
+                letterSpacing: 1.5,
+              ),
             )
           ],
         ),

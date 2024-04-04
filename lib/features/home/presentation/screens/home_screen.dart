@@ -27,7 +27,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("${ref.watch(languageProvider).countryCode}"),
+            Text("${ref.watch(mainlocaleProvider).countryCode}"),
             ElevatedButton(
                 onPressed: () async {
                   Map<String, String> localeMap = {
