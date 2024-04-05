@@ -90,7 +90,6 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
             return value.fold(
                 (error) => CustomErrorWidget(errorMsg: error.message),
                 (data) => SingleChildScrollView(
-                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
                       child: AnimatedBuilder(
@@ -102,39 +101,43 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
                                 children: [
                                   const Header(),
                                   25.height,
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizeTransition(
-                                          sizeFactor:
-                                              Tween<double>(begin: 0, end: 1)
-                                                  .animate(
-                                            CurvedAnimation(
-                                              parent: _sizeAnimation,
-                                              curve: Curves.easeInOut,
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.w),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizeTransition(
+                                            sizeFactor:
+                                                Tween<double>(begin: 0, end: 1)
+                                                    .animate(
+                                              CurvedAnimation(
+                                                parent: _sizeAnimation,
+                                                curve: Curves.easeInOut,
+                                              ),
                                             ),
-                                          ),
-                                          child: const DetailWidget()),
-                                      ListView.separated(
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        padding: EdgeInsets.zero,
-                                        shrinkWrap: true,
-                                        itemCount: data.data?.length ?? 0,
-                                        separatorBuilder: (context, index) {
-                                          return const Divider(
-                                            height: 1,
-                                            thickness: 0.5,
-                                          );
-                                        },
-                                        itemBuilder: (context, index) {
-                                          final chapter = data.data?[index];
-                                          return ChapterListTile(
-                                              chapter: chapter);
-                                        },
-                                      ),
-                                    ],
+                                            child: const DetailWidget()),
+                                        ListView.separated(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          itemCount: data.data?.length ?? 0,
+                                          separatorBuilder: (context, index) {
+                                            return const Divider(
+                                              height: 1,
+                                              thickness: 0.5,
+                                            );
+                                          },
+                                          itemBuilder: (context, index) {
+                                            final chapter = data.data?[index];
+                                            return ChapterListTile(
+                                                chapter: chapter);
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),
