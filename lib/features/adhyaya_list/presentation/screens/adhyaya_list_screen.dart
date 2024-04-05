@@ -1,4 +1,3 @@
-
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
@@ -20,10 +19,43 @@ class AdhyayaListScreen extends ConsumerStatefulWidget {
       _AdhyayaListScreenState();
 }
 
-class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen> {
+class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
+    with TickerProviderStateMixin {
+  late AnimationController _fadeAnimationController;
+  late AnimationController _sizeAnimationController;
+  late Animation<double> _fadeAnimation;
+  late Animation<double> _sizeAnimation;
   @override
   void initState() {
     super.initState();
+    _fadeAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _sizeAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 600),
+    );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_fadeAnimationController);
+    _sizeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_sizeAnimationController);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _fadeAnimationController.dispose();
+    _sizeAnimationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -56,6 +88,8 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen> {
       ),
       body: ref.watch(chaptersProvider).when(
           data: (value) {
+            _fadeAnimationController.forward();
+            _sizeAnimationController.forward();
             return value.fold(
                 (l) => BuildText(
                       text: "${l.message}",
@@ -63,37 +97,57 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen> {
                 (r) => SingleChildScrollView(
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
-                      child: Column(
-                        children: [
-                          const Header(),
-                          25.height,
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20.w),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const DetailWidget(),
-                                ListView.separated(
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  padding: EdgeInsets.zero,
-                                  shrinkWrap: true,
-                                  itemCount: r.data?.length ?? 0,
-                                  separatorBuilder: (context, index) {
-                                    return const Divider(
-                                      height: 1,
-                                      thickness: 0.5,
-                                    );
-                                  },
-                                  itemBuilder: (context, index) {
-                                    final chapter = r.data?[index];
-                                    return ChapterListTile(chapter: chapter);
-                                  },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                      child: AnimatedBuilder(
+                          animation: _fadeAnimation,
+                          builder: (context, child) {
+                            return Opacity(
+                              opacity: _fadeAnimation.value,
+                              child: Column(
+                                children: [
+                                  const Header(),
+                                  25.height,
+                                  Padding(
+                                    padding:
+                                        EdgeInsets.symmetric(horizontal: 20.w),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        SizeTransition(
+                                            sizeFactor:
+                                                Tween<double>(begin: 0, end: 1)
+                                                    .animate(
+                                              CurvedAnimation(
+                                                parent: _sizeAnimation,
+                                                curve: Curves.easeInOut,
+                                              ),
+                                            ),
+                                            child: const DetailWidget()),
+                                        ListView.separated(
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          padding: EdgeInsets.zero,
+                                          shrinkWrap: true,
+                                          itemCount: r.data?.length ?? 0,
+                                          separatorBuilder: (context, index) {
+                                            return const Divider(
+                                              height: 1,
+                                              thickness: 0.5,
+                                            );
+                                          },
+                                          itemBuilder: (context, index) {
+                                            final chapter = r.data?[index];
+                                            return ChapterListTile(
+                                                chapter: chapter);
+                                          },
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
                     ));
           },
           error: (error, stackTrace) {
