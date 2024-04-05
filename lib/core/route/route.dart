@@ -1,13 +1,3 @@
-// import 'package:flutter/material.dart';
-
-// pushTo({required BuildContext context, required Widget screen}) =>
-//     Navigator.push(context, MaterialPageRoute(builder: (c) => screen));
-// pushAndRemoveUpto({required BuildContext context, required Widget screen}) =>
-//     Navigator.pushAndRemoveUntil(
-//         context,
-//         MaterialPageRoute(builder: (c) => screen),
-//         (Route<dynamic> route) => false);
-
 import 'package:bhagvadgita/features/adhyaya_list/presentation/screens/adhyaya_list_screen.dart';
 import 'package:bhagvadgita/features/home/presentation/screens/home_screen.dart';
 import 'package:bhagvadgita/features/slok_detail/presentation/screens/slok_detail_screen.dart';

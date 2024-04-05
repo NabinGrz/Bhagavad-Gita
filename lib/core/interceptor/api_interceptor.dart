@@ -39,17 +39,6 @@ class ApiInterceptor extends Interceptor {
   }
 }
 
-// Future<void> addLocale(RequestOptions options) async {
-//   var locale = await SharedPreferenceHelper.getString(
-//       SharedPreferenceStringConstants.locale);
-//   if (locale != null) {
-//     LocaleModel model = LocaleModel.fromJson(jsonDecode(locale));
-//     options.headers.putIfAbsent("Locale", () => model.languageCode);
-//   } else {
-//     options.headers.putIfAbsent("Locale", () => 'en');
-//   }
-// }
-
 void onRequestLogger(RequestOptions options) {
   requestLogger(
     "${LogColorConstant.green}${options.headers}",

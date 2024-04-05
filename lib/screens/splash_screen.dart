@@ -2,9 +2,9 @@ import 'package:bhagvadgita/features/splash/presentation/provider/splash_provide
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import '../../../../core/dependency_injection/injector.dart';
-import '../../../../core/helper/shared_preference_helper.dart';
-import '../../../../core/route/route.dart';
+import '../core/dependency_injection/injector.dart';
+import '../core/helper/shared_preference_helper.dart';
+import '../core/route/route.dart';
 
 class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});

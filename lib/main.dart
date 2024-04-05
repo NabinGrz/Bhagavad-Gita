@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'core/dependency_injection/injector.dart';
 import 'features/language_change/presentation/providers/language_provider.dart';
-import 'features/splash/presentation/screens/splash_screen.dart';
+import 'screens/splash_screen.dart';
 import 'core/route/route.dart';
 
 void main() async {
@@ -28,14 +27,6 @@ class MyApp extends ConsumerStatefulWidget {
 class _MyAppState extends ConsumerState<MyApp> {
   Locale locale = const Locale("en", 'US');
 
-  ThemeData _buildTheme(brightness) {
-    var baseTheme = ThemeData(brightness: brightness);
-
-    return baseTheme.copyWith(
-      textTheme: GoogleFonts.interTextTheme(baseTheme.textTheme),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -46,7 +37,6 @@ class _MyAppState extends ConsumerState<MyApp> {
           return MaterialApp(
             title: 'Bhagavad Gita',
             debugShowCheckedModeBanner: false,
-            theme: _buildTheme(Brightness.light),
             locale: ref.watch(mainlocaleProvider),
             localeResolutionCallback: (deviceLocale, supportedLocales) {
               for (var locale in supportedLocales) {
