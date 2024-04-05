@@ -1,6 +1,7 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
 import 'package:bhagvadgita/core/extensions/string_extension.dart';
 import 'package:bhagvadgita/core/route/route.dart';
+import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_list/data/model/bhagavad_gita_verse.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,9 @@ class SlokWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      splashFactory: InkSparkle.constantTurbulenceSeedSplashFactory,
+      splashColor: AppColor.primary.withOpacity(0.2),
+      highlightColor: AppColor.primary.withOpacity(0.1),
       onTap: () {
         int chapterNumber = verse.chapterNumber;
         int verseNumber = verse.verseNumber;

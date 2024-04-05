@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/shared/widgets/custom_loader.dart';
 import '../widgets/chapter_list_tile.dart';
 import '../widgets/detail_widget.dart';
 import '../widgets/header.dart';
@@ -25,6 +26,7 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
   late AnimationController _sizeAnimationController;
   late Animation<double> _fadeAnimation;
   late Animation<double> _sizeAnimation;
+
   @override
   void initState() {
     super.initState();
@@ -44,11 +46,6 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
       begin: 0.0,
       end: 1.0,
     ).animate(_sizeAnimationController);
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
   }
 
   @override
@@ -153,8 +150,7 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
           error: (error, stackTrace) {
             return Center(child: Text("$error"));
           },
-          loading: () =>
-              const Center(child: CircularProgressIndicator.adaptive())),
+          loading: () => const CustomLoader()),
     );
   }
 }

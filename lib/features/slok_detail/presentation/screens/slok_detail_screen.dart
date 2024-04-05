@@ -1,4 +1,5 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
+import 'package:bhagvadgita/core/shared/widgets/custom_loader.dart';
 import 'package:bhagvadgita/core/theme/app_colors.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/slok_detail/presentation/providers/slok_detail_provider.dart';
@@ -18,18 +19,37 @@ class SlokDetailScreen extends ConsumerStatefulWidget {
       _SlokDetailScreenState();
 }
 
-class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
+class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _fadeAnimationController;
+  late Animation<double> _fadeAnimation;
   SlokDetailNotifier get slokdetailnotifier =>
       ref.read(slokDetailProvider.notifier);
   get argument =>
       ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
   @override
   void initState() {
+    _fadeAnimationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(_fadeAnimationController);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
       await slokdetailnotifier.slokDetail(
           argument?['chapter_number'], argument?['verse_number']);
+      _fadeAnimationController.forward();
     });
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _fadeAnimationController.dispose();
+    super.dispose();
   }
 
   @override
@@ -78,53 +98,59 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen> {
               ],
             ),
       body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator.adaptive(),
-            )
-          : SingleChildScrollView(
-              padding: EdgeInsets.symmetric(
-                horizontal: 20.w,
-              ),
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  if (detail is Success) ...{
-                    25.height,
-                    Text(
-                      "${data?.chapterNumber}.${data?.chapterNumber}",
-                      style: bold().copyWith(
-                        fontSize: 16.sp,
-                      ),
+          ? const CustomLoader()
+          : AnimatedBuilder(
+              animation: _fadeAnimation,
+              builder: (context, child) {
+                return Opacity(
+                  opacity: _fadeAnimation.value,
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
                     ),
-                    10.height,
-                    Text(
-                      "${data?.text}",
-                      textAlign: TextAlign.center,
-                      style: bold().copyWith(
-                          fontSize: 16.sp, color: const Color(0xffCB874B)),
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        if (detail is Success) ...{
+                          25.height,
+                          Text(
+                            "${data?.chapterNumber}.${data?.chapterNumber}",
+                            style: bold().copyWith(
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                          10.height,
+                          Text(
+                            "${data?.text}",
+                            textAlign: TextAlign.center,
+                            style: bold().copyWith(
+                                fontSize: 16.sp,
+                                color: const Color(0xffCB874B)),
+                          ),
+                          30.height,
+                          SlokTranslationsWidget(
+                            detail: data,
+                            isTranslation: true,
+                          ),
+                          35.height,
+                          const Divider(
+                            height: 1,
+                            thickness: 0.2,
+                          ),
+                          35.height,
+                          SlokTranslationsWidget(
+                            detail: data,
+                            isTranslation: false,
+                          ),
+                          40.height,
+                        }
+                      ],
                     ),
-                    30.height,
-                    SlokTranslationsWidget(
-                      detail: data,
-                      isTranslation: true,
-                    ),
-                    35.height,
-                    const Divider(
-                      height: 1,
-                      thickness: 0.2,
-                    ),
-                    35.height,
-                    SlokTranslationsWidget(
-                      detail: data,
-                      isTranslation: false,
-                    ),
-                    40.height,
-                  }
-                ],
-              ),
-            ),
+                  ),
+                );
+              }),
     );
   }
 }

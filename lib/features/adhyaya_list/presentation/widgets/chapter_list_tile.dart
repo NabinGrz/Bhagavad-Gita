@@ -17,6 +17,7 @@ class ChapterListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      splashColor: AppColor.primary.withOpacity(0.3),
       onTap: () {
         AppRouter.pushNamed(
             context: context,
