@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../../../../core/shared/widgets/error_widget.dart';
 import '../../../language_change/presentation/screens/language_change_dialog.dart';
 import '../../../slok_list/domain/entities/slok_states/slok_state.dart';
 
@@ -57,45 +58,49 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen>
     final notifier = ref.read(slokDetailProvider.notifier);
     final detail = ref.watch(slokDetailProvider);
     final isLoading = detail is Loading;
+    final hasError = detail is Failure;
     final data = detail is Success ? detail.detail?.data : null;
+    final errorMsg = hasError ? detail.failedAppStateResponse : null;
     final isFavorite =
         ref.watch(favoriteProvider)?.contains(data?.id.toString()) ?? false;
     return Scaffold(
       appBar: isLoading
           ? null
           : AppBar(
-              actions: [
-                InkWell(
-                  splashColor: AppColor.primary.withOpacity(0.3),
-                  highlightColor: AppColor.primary.withOpacity(0.1),
-                  onTap: () async =>
-                      await notifier.toggleFavorite(data, isFavorite, ref),
-                  child: Icon(
-                    isFavorite ? Icons.bookmark : Icons.bookmark_outline,
-                    color: isFavorite ? AppColor.primary : null,
-                  ),
-                ),
-                20.width,
-                InkWell(
-                  splashColor: AppColor.primary.withOpacity(0.3),
-                  highlightColor: AppColor.primary.withOpacity(0.1),
-                  onTap: () {
-                    showDialog(
-                      context: context,
-                      builder: (context) => ChangeLanguageDialog(
-                        onPressed: () => Navigator.pop(context),
+              actions: hasError
+                  ? null
+                  : [
+                      InkWell(
+                        splashColor: AppColor.primary.withOpacity(0.3),
+                        highlightColor: AppColor.primary.withOpacity(0.1),
+                        onTap: () async => await notifier.toggleFavorite(
+                            data, isFavorite, ref),
+                        child: Icon(
+                          isFavorite ? Icons.bookmark : Icons.bookmark_outline,
+                          color: isFavorite ? AppColor.primary : null,
+                        ),
                       ),
-                    );
-                  },
-                  child: Text(
-                    "Aa",
-                    style: regular().copyWith(fontSize: 14.sp),
-                  ),
-                ),
-                25.width,
-                const Icon(Icons.menu),
-                20.width,
-              ],
+                      20.width,
+                      InkWell(
+                        splashColor: AppColor.primary.withOpacity(0.3),
+                        highlightColor: AppColor.primary.withOpacity(0.1),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => ChangeLanguageDialog(
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Aa",
+                          style: regular().copyWith(fontSize: 14.sp),
+                        ),
+                      ),
+                      25.width,
+                      const Icon(Icons.menu),
+                      20.width,
+                    ],
             ),
       body: isLoading
           ? const CustomLoader()
@@ -104,51 +109,54 @@ class _SlokDetailScreenState extends ConsumerState<SlokDetailScreen>
               builder: (context, child) {
                 return Opacity(
                   opacity: _fadeAnimation.value,
-                  child: SingleChildScrollView(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 20.w,
-                    ),
-                    physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics()),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        if (detail is Success) ...{
-                          25.height,
-                          Text(
-                            "${data?.chapterNumber}.${data?.chapterNumber}",
-                            style: bold().copyWith(
-                              fontSize: 16.sp,
-                            ),
+                  child: hasError
+                      ? CustomErrorWidget(
+                          errorMsg: errorMsg ?? "Something went wrong")
+                      : SingleChildScrollView(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 20.w,
                           ),
-                          10.height,
-                          Text(
-                            "${data?.text}",
-                            textAlign: TextAlign.center,
-                            style: bold().copyWith(
-                                fontSize: 16.sp,
-                                color: const Color(0xffCB874B)),
+                          physics: const BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              if (detail is Success) ...{
+                                25.height,
+                                Text(
+                                  "${data?.chapterNumber}.${data?.chapterNumber}",
+                                  style: bold().copyWith(
+                                    fontSize: 16.sp,
+                                  ),
+                                ),
+                                10.height,
+                                Text(
+                                  "${data?.text}",
+                                  textAlign: TextAlign.center,
+                                  style: bold().copyWith(
+                                      fontSize: 16.sp,
+                                      color: const Color(0xffCB874B)),
+                                ),
+                                30.height,
+                                SlokTranslationsWidget(
+                                  detail: data,
+                                  isTranslation: true,
+                                ),
+                                35.height,
+                                const Divider(
+                                  height: 1,
+                                  thickness: 0.2,
+                                ),
+                                35.height,
+                                SlokTranslationsWidget(
+                                  detail: data,
+                                  isTranslation: false,
+                                ),
+                                40.height,
+                              }
+                            ],
                           ),
-                          30.height,
-                          SlokTranslationsWidget(
-                            detail: data,
-                            isTranslation: true,
-                          ),
-                          35.height,
-                          const Divider(
-                            height: 1,
-                            thickness: 0.2,
-                          ),
-                          35.height,
-                          SlokTranslationsWidget(
-                            detail: data,
-                            isTranslation: false,
-                          ),
-                          40.height,
-                        }
-                      ],
-                    ),
-                  ),
+                        ),
                 );
               }),
     );

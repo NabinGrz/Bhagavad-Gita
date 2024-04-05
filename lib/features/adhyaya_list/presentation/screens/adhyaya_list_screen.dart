@@ -1,5 +1,4 @@
 import 'package:bhagvadgita/core/extensions/num_extension.dart';
-import 'package:bhagvadgita/core/shared/widgets/build_text.dart';
 import 'package:bhagvadgita/core/theme/text_styles.dart';
 import 'package:bhagvadgita/features/adhyaya_list/presentation/providers/adhyaya_list_provider.dart';
 import 'package:bhagvadgita/features/language_change/presentation/screens/language_change_dialog.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/shared/widgets/custom_loader.dart';
+import '../../../../core/shared/widgets/error_widget.dart';
 import '../widgets/chapter_list_tile.dart';
 import '../widgets/detail_widget.dart';
 import '../widgets/header.dart';
@@ -88,10 +88,9 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
             _fadeAnimationController.forward();
             _sizeAnimationController.forward();
             return value.fold(
-                (l) => BuildText(
-                      text: "${l.message}",
-                    ),
-                (r) => SingleChildScrollView(
+                (error) => CustomErrorWidget(errorMsg: error.message),
+                (data) => SingleChildScrollView(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
                       child: AnimatedBuilder(
@@ -103,43 +102,39 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
                                 children: [
                                   const Header(),
                                   25.height,
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 20.w),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizeTransition(
-                                            sizeFactor:
-                                                Tween<double>(begin: 0, end: 1)
-                                                    .animate(
-                                              CurvedAnimation(
-                                                parent: _sizeAnimation,
-                                                curve: Curves.easeInOut,
-                                              ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      SizeTransition(
+                                          sizeFactor:
+                                              Tween<double>(begin: 0, end: 1)
+                                                  .animate(
+                                            CurvedAnimation(
+                                              parent: _sizeAnimation,
+                                              curve: Curves.easeInOut,
                                             ),
-                                            child: const DetailWidget()),
-                                        ListView.separated(
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          padding: EdgeInsets.zero,
-                                          shrinkWrap: true,
-                                          itemCount: r.data?.length ?? 0,
-                                          separatorBuilder: (context, index) {
-                                            return const Divider(
-                                              height: 1,
-                                              thickness: 0.5,
-                                            );
-                                          },
-                                          itemBuilder: (context, index) {
-                                            final chapter = r.data?[index];
-                                            return ChapterListTile(
-                                                chapter: chapter);
-                                          },
-                                        ),
-                                      ],
-                                    ),
+                                          ),
+                                          child: const DetailWidget()),
+                                      ListView.separated(
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        padding: EdgeInsets.zero,
+                                        shrinkWrap: true,
+                                        itemCount: data.data?.length ?? 0,
+                                        separatorBuilder: (context, index) {
+                                          return const Divider(
+                                            height: 1,
+                                            thickness: 0.5,
+                                          );
+                                        },
+                                        itemBuilder: (context, index) {
+                                          final chapter = data.data?[index];
+                                          return ChapterListTile(
+                                              chapter: chapter);
+                                        },
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -148,7 +143,7 @@ class _AdhyayaListScreenState extends ConsumerState<AdhyayaListScreen>
                     ));
           },
           error: (error, stackTrace) {
-            return Center(child: Text("$error"));
+            return CustomErrorWidget(errorMsg: error.toString());
           },
           loading: () => const CustomLoader()),
     );

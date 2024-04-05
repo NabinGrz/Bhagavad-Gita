@@ -1,5 +1,4 @@
 import 'package:bhagvadgita/features/adhyaya_list/presentation/screens/adhyaya_list_screen.dart';
-import 'package:bhagvadgita/features/home/presentation/screens/home_screen.dart';
 import 'package:bhagvadgita/features/slok_detail/presentation/screens/slok_detail_screen.dart';
 import 'package:bhagvadgita/features/slok_list/presentation/screens/slok_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +9,6 @@ class AppRouter {
   const AppRouter._();
 
   static const onBoardingScreen = "/onBoarding";
-  static const homeScreen = "/home";
   static const adhyayaListScreen = "/adhyayaListScreen";
   static const slokListScreen = "/slokListScreen";
   static const slokDetailScreen = "/slokDetailScreen";
@@ -18,8 +16,6 @@ class AppRouter {
     switch (settings.name) {
       case onBoardingScreen:
         return navigate(settings, const OnBoardingScreen());
-      case homeScreen:
-        return navigate(settings, const HomeScreen());
       case adhyayaListScreen:
         return navigate(settings, const AdhyayaListScreen());
       case slokListScreen:
